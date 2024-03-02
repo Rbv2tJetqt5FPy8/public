@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comment Page</title>
+    <style>
+        #comments {
+            margin-top: 20px;
+        }
+        .comment {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Comment Page</h1>
+    <textarea id="commentInput" placeholder="Write your comment here..."></textarea>
+    <button onclick="addComment()">Add Comment</button>
+    <div id="comments"></div>
+
+    <script>
+        function addComment() {
+            var commentInput = document.getElementById('commentInput');
+            var comments = document.getElementById('comments');
+
+            var newComment = document.createElement('div');
+            newComment.textContent = commentInput.value;
+            newComment.className = 'comment';
+
+            comments.appendChild(newComment);
+
+            commentInput.value = '';
+        }
+    </script>
+</body>
+</html>

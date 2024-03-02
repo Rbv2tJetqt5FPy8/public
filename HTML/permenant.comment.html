@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comment Page</title>
+    <style>
+        #comments {
+            margin-top: 20px;
+        }
+        .comment {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Comment Page</h1>
+    <textarea id="commentInput" placeholder="Write your comment here..."></textarea>
+    <button onclick="addComment()">Add Comment</button>
+    <div id="comments"></div>
+
+    <script>
+        function addComment() {
+            var commentInput = document.getElementById('commentInput');
+            var comments = document.getElementById('comments');
+
+            var newComment = document.createElement('div');
+            newComment.textContent = commentInput.value;
+            newComment.className = 'comment';
+
+            comments.appendChild(newComment);
+
+            // Save the comment to localStorage
+            var existingComments = localStorage.getItem('comments') ? JSON.parse(localStorage.getItem('comments')) : [];
+            existingComments.push(commentInput.value);
+            localStorage.setItem('comments', JSON.stringify(existingComments));
+
+            commentInput.value = '';
+        }
+
+        // Load comments from localStorage when the page loads
+        window.onload = function() {
+            var comments = document.getElementById('comments');
+            var existingComments = localStorage.getItem('comments') ? JSON.parse(localStorage.getItem('comments')) : [];
+            for (var i = 0; i < existingComments.length; i++) {
+                var comment = document.createElement('div');
+                comment.textContent = existingComments[i];
+                comment.className = 'comment';
+                comments.appendChild(comment);
+            }
+        }
+    </script>
+</body>
+</html>
